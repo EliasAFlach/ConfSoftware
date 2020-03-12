@@ -5,6 +5,8 @@
  */
 package confsofware;
 
+import Telas.JfrTelaLogin;
+
 /**
  *
  * @author elias.flach
@@ -15,7 +17,7 @@ public class ConfSofware {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        new JfrTelaLogin().setVisible(true);
     }
-    
+
 }
