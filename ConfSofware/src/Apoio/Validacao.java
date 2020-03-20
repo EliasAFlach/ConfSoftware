@@ -4,7 +4,11 @@
  */
 package Apoio;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 
@@ -67,9 +71,25 @@ public class Validacao {
         return (validarDataDMA(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[1])));
     }
 
-    public static void validarTelefone(JFormattedTextField campo) {
-        if (campo.getText().trim().length() < 13) {
-            Formatacao.reformatarTelefone(campo);
-        }
+    
+       public static void validarNumbersOnly(JTextField campo, JLabel validation) {
+        campo.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent e1) {
+                try {
+                    
+                    
+                    double i = (Double.parseDouble(campo.getText().trim()));
+                    validation.setText("");
+                } catch (NumberFormatException e) {
+                    validation.setText("Invalid number");
+
+                }
+            }
+        });
     }
+
+    
 }
+
+
+

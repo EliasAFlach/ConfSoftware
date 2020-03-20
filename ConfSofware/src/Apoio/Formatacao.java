@@ -1,5 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Apoio;
 
+import com.sun.glass.events.KeyEvent;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.*;
 import java.util.Date;
 import java.util.Locale;
@@ -14,7 +22,7 @@ public class Formatacao {
         JFormattedTextField campoFormatado = null;
         MaskFormatter format = new MaskFormatter();
 
-        format.setPlaceholderCharacter('_');
+        format.setPlaceholderCharacter(' ');
         format.setValueContainsLiteralCharacters(false);
 
         try {
@@ -25,9 +33,22 @@ public class Formatacao {
         }
         return campoFormatado;
     }
+    
+    public static double round(double value, int places) {
+    if (places < 0) throw new IllegalArgumentException();
+
+    BigDecimal bd = new BigDecimal(value);
+    bd = bd.setScale(places, RoundingMode.HALF_UP);
+    return bd.doubleValue();
+}
 
     public static void formatarDecimal(JTextField campo) {
         campo.setText(df.format(Double.parseDouble(campo.getText())));
+    }
+
+    public static String formatarDecimal(double valor) {
+        NumberFormat formatter = new DecimalFormat("###0.00");
+        return (formatter.format(valor));
     }
 
     public static JFormattedTextField getTelefone() {
@@ -46,14 +67,19 @@ public class Formatacao {
         return getFormatado("##/##/####");
     }
 
+    public static JFormattedTextField getDataHora() {
+        return getFormatado("##/##/#### ##:##");
+    }
+
     public void formatoDecimal(JTextField campo) {
         campo.setText(df.format(Double.parseDouble(campo.getText())));
     }
-
-    public static void reformatarData(JFormattedTextField campo) {
+    
+    
+    public static void formatarData(JFormattedTextField campo) {
         try {
             MaskFormatter m = new MaskFormatter();
-            m.setPlaceholderCharacter('_');
+            m.setPlaceholderCharacter(' ');
             m.setMask("##/##/####");
             campo.setFormatterFactory(null);
             campo.setFormatterFactory(new DefaultFormatterFactory(m));
@@ -63,10 +89,10 @@ public class Formatacao {
         }
     }
 
-    public static void reformatarCpf(JFormattedTextField campo) {
+    public static void formatarCpf(JFormattedTextField campo) {
         try {
             MaskFormatter m = new MaskFormatter();
-            m.setPlaceholderCharacter('_');
+            m.setPlaceholderCharacter(' ');
             m.setMask("###.###.###-##");
             campo.setFormatterFactory(null);
             campo.setFormatterFactory(new DefaultFormatterFactory(m));
@@ -76,7 +102,7 @@ public class Formatacao {
         }
     }
 
-    public static void reformatarCnpj(JFormattedTextField campo) {
+    public static void formatarCnpj(JFormattedTextField campo) {
         try {
             MaskFormatter m = new MaskFormatter();
             m.setPlaceholderCharacter(' ');
@@ -89,7 +115,7 @@ public class Formatacao {
         }
     }
 
-    public static void reformatarTelefone(JFormattedTextField campo) {
+    public static void formatarTelefone(JFormattedTextField campo) {
         try {
             MaskFormatter m = new MaskFormatter();
             m.setPlaceholderCharacter(' ');
@@ -127,7 +153,7 @@ public class Formatacao {
     public static String removerFormatacao(String dado) {
         String retorno = "";
         for (int i = 0; i < dado.length(); i++) {
-            if (dado.charAt(i) != '.' && dado.charAt(i) != '/' && dado.charAt(i) != '-' && dado.charAt(i) != '(' && dado.charAt(i) != ')') {
+            if (dado.charAt(i) != '.' && dado.charAt(i) != '/' && dado.charAt(i) != '-') {
                 retorno = retorno + dado.charAt(i);
             }
         }
@@ -138,7 +164,37 @@ public class Formatacao {
         Date now = new Date();
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String dataHoje = df.format(now);
-        
+
         return dataHoje;
     }
+
+    public static String getDataHoraAtual() {
+        Date now = new Date();
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String dataHoje = df.format(now);
+
+        return dataHoje;
+    }
+    
+     public static boolean isNumeric(String string) {
+      return string.matches("^[-+]?\\d+(\\.\\d+)?$");
+  }
+     
+     public static void forceDotsAndNumbers(java.awt.event.KeyEvent evt){                                   
+        char c = evt.getKeyChar();
+        
+        if(!(Character.isDigit(c) || c ==  KeyEvent.VK_BACKSPACE || c == KeyEvent.VK_DELETE || c == KeyEvent.VK_PERIOD))
+        {
+            evt.consume();
+        }
+     }
+        
+     public static void forceNumbers(java.awt.event.KeyEvent evt){                                   
+        char c = evt.getKeyChar();
+        
+        if(!(Character.isDigit(c) || c ==  KeyEvent.VK_BACKSPACE || c == KeyEvent.VK_DELETE))
+        {
+            evt.consume();
+        }   
+    }                                  
 }

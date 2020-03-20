@@ -1,4 +1,4 @@
-package apoio;
+package Apoio;
 
 /*
  * To change this template, choose Tools | Templates

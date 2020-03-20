@@ -5,7 +5,7 @@
 package Apoio;
 
 import java.sql.ResultSet;
-import apoio.ConexaoBD;
+import Apoio.ConexaoBD;
 import javax.swing.JComboBox;
 
 /**

@@ -6,7 +6,7 @@
 package Telas;
 
 import Entidade.Aluno;
-import apoio.ConexaoBD;
+import Apoio.ConexaoBD;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -45,14 +45,10 @@ public class JfrTelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
-        BtnCadastroEstabelecimento = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         BtnCadastroCliente = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        btnRelComprasCliente = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         MenuManutencao = new javax.swing.JMenuBar();
         jMenuRelatórios = new javax.swing.JMenu();
         MenuRelatorioCompraCliente = new javax.swing.JMenuItem();
@@ -64,39 +60,14 @@ public class JfrTelaPrincipal extends javax.swing.JFrame {
 
         jInternalFrame1.setVisible(true);
 
-        BtnCadastroEstabelecimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Estabelecimento.png"))); // NOI18N
-        BtnCadastroEstabelecimento.setToolTipText("Cadastro de Estabelecimento");
-        BtnCadastroEstabelecimento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnCadastroEstabelecimentoActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Cadastros");
 
         BtnCadastroCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Cliente.png"))); // NOI18N
+        BtnCadastroCliente.setText("Pessoa");
         BtnCadastroCliente.setToolTipText("Cadastro de Clientes");
         BtnCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCadastroClienteActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Venda");
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Agenda.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Relatórios");
-
-        btnRelComprasCliente.setText("Compras por Cliente");
-        btnRelComprasCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRelComprasClienteActionPerformed(evt);
             }
         });
 
@@ -106,6 +77,17 @@ public class JfrTelaPrincipal extends javax.swing.JFrame {
                 btnSairActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 712, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         jMenuRelatórios.setText("Relatórios");
 
@@ -149,56 +131,37 @@ public class JfrTelaPrincipal extends javax.swing.JFrame {
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(BtnCadastroEstabelecimento)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                        .addGap(58, 58, 58)
-                                        .addComponent(jLabel2))
-                                    .addComponent(BtnCadastroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                .addGap(228, 228, 228)
-                                .addComponent(jLabel1))
-                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                .addGap(232, 232, 232)
-                                .addComponent(jLabel3))
-                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnRelComprasCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                .addGap(105, 105, 105)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 182, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addComponent(BtnCadastroCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(73, Short.MAX_VALUE))))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BtnCadastroEstabelecimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtnCadastroCliente))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(btnRelComprasCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
-                .addComponent(btnSair)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BtnCadastroCliente)
+                        .addGap(0, 414, Short.MAX_VALUE))
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jDesktopPane1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSair)))
                 .addContainerGap())
         );
 
@@ -219,87 +182,69 @@ public class JfrTelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(524, 647));
+        setSize(new java.awt.Dimension(973, 647));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void BtnCadastroEstabelecimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastroEstabelecimentoActionPerformed
-//        DlgCadastroEstabelecimento dlg = new DlgCadastroEstabelecimento(this, true);
-//        dlg.setLocationRelativeTo(this);
-//        dlg.setVisible(true);
-    }//GEN-LAST:event_BtnCadastroEstabelecimentoActionPerformed
-
-    private void BtnCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastroClienteActionPerformed
-//        DlgCadastroCliente dlg = new DlgCadastroCliente(this, true);
-//        dlg.setLocationRelativeTo(this);
-//        dlg.setVisible(true);
-    }//GEN-LAST:event_BtnCadastroClienteActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        JfrIngressoVenda p = new JfrIngressoVenda();
-//        p.setVisible(true);
-//        dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void MenuRelatorioCompraClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRelatorioCompraClienteActionPerformed
-//        DlgRelatorioClientes dlg = new DlgRelatorioClientes(this, true);
-//        dlg.setLocationRelativeTo(this);
-//        dlg.setVisible(true);
-    }//GEN-LAST:event_MenuRelatorioCompraClienteActionPerformed
-
-    private void MenuRelEventosValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRelEventosValorActionPerformed
-//        DlgRelatorioValorShow dlg = new DlgRelatorioValorShow(this, true);
-//        dlg.setLocationRelativeTo(this);
-//        dlg.setVisible(true);
-    }//GEN-LAST:event_MenuRelEventosValorActionPerformed
-
-    private void btnRelComprasClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelComprasClienteActionPerformed
-//        DlgRelatorioClientes dlg = new DlgRelatorioClientes(this, true);
-//        dlg.setLocationRelativeTo(this);
-//        dlg.setVisible(true);
-    }//GEN-LAST:event_btnRelComprasClienteActionPerformed
-
-    private void MenuRelEstabelecimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRelEstabelecimentosActionPerformed
-//        try {
-//            // Compila o relatorio
-//            JasperReport relatorio = JasperCompileManager.compileReport(getClass().getResourceAsStream("/Relatórios/rel_estabelecimentos.jrxml"));
-//
-//            // Mapeia campos de parametros para o relatorio, mesmo que nao existam
-//            Map parametros = new HashMap();
-//
-//            // Executa relatorio
-//            JasperPrint impressao = JasperFillManager.fillReport(relatorio, parametros, ConexaoBD.getInstance().getConnection());
-//
-//            // Exibe resultado em video
-//            this.dispose();
-//            JasperViewer.viewReport(impressao, false);
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "Erro ao gerar relatório: " + e);
-//        }
-    }//GEN-LAST:event_MenuRelEstabelecimentosActionPerformed
-
-    private void MenuRelUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRelUsuariosActionPerformed
-//        try {
-//            // Compila o relatorio
-//            JasperReport relatorio = JasperCompileManager.compileReport(getClass().getResourceAsStream("/Relatórios/rel_usuarios.jrxml"));
-//
-//            // Mapeia campos de parametros para o relatorio, mesmo que nao existam
-//            Map parametros = new HashMap();
-//
-//            // Executa relatorio
-//            JasperPrint impressao = JasperFillManager.fillReport(relatorio, parametros, ConexaoBD.getInstance().getConnection());
-//
-//            // Exibe resultado em video
-//            this.dispose();
-//            JasperViewer.viewReport(impressao, false);
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "Erro ao gerar relatório: " + e);
-//        }
-    }//GEN-LAST:event_MenuRelUsuariosActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void MenuRelUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRelUsuariosActionPerformed
+        //        try {
+            //            // Compila o relatorio
+            //            JasperReport relatorio = JasperCompileManager.compileReport(getClass().getResourceAsStream("/Relatórios/rel_usuarios.jrxml"));
+            //
+            //            // Mapeia campos de parametros para o relatorio, mesmo que nao existam
+            //            Map parametros = new HashMap();
+            //
+            //            // Executa relatorio
+            //            JasperPrint impressao = JasperFillManager.fillReport(relatorio, parametros, ConexaoBD.getInstance().getConnection());
+            //
+            //            // Exibe resultado em video
+            //            this.dispose();
+            //            JasperViewer.viewReport(impressao, false);
+            //        } catch (Exception e) {
+            //            JOptionPane.showMessageDialog(null, "Erro ao gerar relatório: " + e);
+            //        }
+    }//GEN-LAST:event_MenuRelUsuariosActionPerformed
+
+    private void MenuRelEstabelecimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRelEstabelecimentosActionPerformed
+        //        try {
+            //            // Compila o relatorio
+            //            JasperReport relatorio = JasperCompileManager.compileReport(getClass().getResourceAsStream("/Relatórios/rel_estabelecimentos.jrxml"));
+            //
+            //            // Mapeia campos de parametros para o relatorio, mesmo que nao existam
+            //            Map parametros = new HashMap();
+            //
+            //            // Executa relatorio
+            //            JasperPrint impressao = JasperFillManager.fillReport(relatorio, parametros, ConexaoBD.getInstance().getConnection());
+            //
+            //            // Exibe resultado em video
+            //            this.dispose();
+            //            JasperViewer.viewReport(impressao, false);
+            //        } catch (Exception e) {
+            //            JOptionPane.showMessageDialog(null, "Erro ao gerar relatório: " + e);
+            //        }
+    }//GEN-LAST:event_MenuRelEstabelecimentosActionPerformed
+
+    private void MenuRelEventosValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRelEventosValorActionPerformed
+        //        DlgRelatorioValorShow dlg = new DlgRelatorioValorShow(this, true);
+        //        dlg.setLocationRelativeTo(this);
+        //        dlg.setVisible(true);
+    }//GEN-LAST:event_MenuRelEventosValorActionPerformed
+
+    private void MenuRelatorioCompraClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRelatorioCompraClienteActionPerformed
+        //        DlgRelatorioClientes dlg = new DlgRelatorioClientes(this, true);
+        //        dlg.setLocationRelativeTo(this);
+        //        dlg.setVisible(true);
+    }//GEN-LAST:event_MenuRelatorioCompraClienteActionPerformed
+
+    private void BtnCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastroClienteActionPerformed
+        IfrUsuario ifrUsuario = new IfrUsuario();
+        jDesktopPane1.add(ifrUsuario);
+        ifrUsuario.setVisible(true);
+    }//GEN-LAST:event_BtnCadastroClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,19 +284,15 @@ public class JfrTelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCadastroCliente;
-    private javax.swing.JButton BtnCadastroEstabelecimento;
     private javax.swing.JMenuBar MenuManutencao;
     private javax.swing.JMenuItem MenuRelEstabelecimentos;
     private javax.swing.JMenuItem MenuRelEventosValor;
     private javax.swing.JMenuItem MenuRelUsuarios;
     private javax.swing.JMenuItem MenuRelatorioCompraCliente;
-    private javax.swing.JButton btnRelComprasCliente;
     private javax.swing.JButton btnSair;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenuRelatórios;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,7 +7,7 @@ package Telas;
 
 import DAO.AlunoDAO;
 import Entidade.Aluno;
-import apoio.ConexaoBD;
+import Apoio.ConexaoBD;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -66,7 +66,7 @@ public class JfrTelaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAcessar);
-        btnAcessar.setBounds(297, 160, 90, 23);
+        btnAcessar.setBounds(297, 160, 90, 25);
 
         btnSair.setText("Sair");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -75,13 +75,19 @@ public class JfrTelaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSair);
-        btnSair.setBounds(400, 160, 80, 23);
+        btnSair.setBounds(400, 160, 80, 25);
 
         jLabel1.setText("CPF:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(230, 90, 50, 20);
+
+        txtCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCPFActionPerformed(evt);
+            }
+        });
         getContentPane().add(txtCPF);
-        txtCPF.setBounds(290, 90, 190, 20);
+        txtCPF.setBounds(290, 90, 190, 22);
 
         setSize(new java.awt.Dimension(530, 277));
         setLocationRelativeTo(null);
@@ -127,6 +133,10 @@ public class JfrTelaLogin extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnAcessarKeyPressed
+
+    private void txtCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCPFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCPFActionPerformed
 
     /**
      * @param args the command line arguments

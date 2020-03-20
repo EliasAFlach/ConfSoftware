@@ -7,7 +7,7 @@ package DAO;
 
 import Apoio.IDAO;
 import Entidade.Aluno;
-import apoio.ConexaoBD;
+import Apoio.ConexaoBD;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
