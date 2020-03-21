@@ -5,9 +5,9 @@
  */
 package DAO;
 
+import Apoio.ConexaoBD;
 import Apoio.IDAO;
 import Entidade.Aluno;
-import apoio.ConexaoBD;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -126,7 +126,7 @@ public class AlunoDAO implements IDAO {
 //                    usuario.setAluno(resultado.getString("usuario"));
 //                    usuario.setSenha(resultado.getString("senha"));
 //                    usuario.setTipo_usuario(resultado.getString("tipo_usuario"));
-                    aluno.setSituacao(resultado.getString("situacao").charAt(0));
+                    aluno.setSituacao(resultado.getString("situacao"));
 
                     usuariosUsers.add(aluno);
                 }
@@ -156,7 +156,7 @@ public class AlunoDAO implements IDAO {
 //                usuario.setAluno(resultado.getString("usuario"));
 //                usuario.setSenha(resultado.getString("senha"));
 //                usuario.setTipo_usuario(resultado.getString("tipo_usuario"));
-                usuario.setSituacao(resultado.getString("situacao").charAt(0));
+                usuario.setSituacao(resultado.getString("situacao"));
                 return usuario;
             } else {
                 return null;
@@ -181,9 +181,10 @@ public class AlunoDAO implements IDAO {
                 Aluno aluno = new Aluno();
                 aluno.setId(resultado.getInt("id"));
                 aluno.setNome(resultado.getString("nome"));
-                aluno.setEndereco(resultado.getString("nome"));
+                aluno.setEndereco(resultado.getString("endereco"));
                 aluno.setCpf(resultado.getString("cpf"));
-                aluno.setSituacao(resultado.getString("situacao").charAt(0));
+                aluno.setSituacao(resultado.getString("status"));
+                aluno.setCodigo(resultado.getString("codigo"));
                 return aluno;
             } else {
                 return null;

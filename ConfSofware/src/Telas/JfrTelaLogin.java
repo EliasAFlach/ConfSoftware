@@ -5,9 +5,9 @@
  */
 package Telas;
 
+import Apoio.Validacao;
 import DAO.AlunoDAO;
 import Entidade.Aluno;
-import apoio.ConexaoBD;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,6 +45,8 @@ public class JfrTelaLogin extends javax.swing.JFrame {
         btnSair = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtCPF = new javax.swing.JTextField();
+        txtCodigo = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -52,7 +54,7 @@ public class JfrTelaLogin extends javax.swing.JFrame {
 
         jLabelFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Tela Login.png"))); // NOI18N
         getContentPane().add(jLabelFundo);
-        jLabelFundo.setBounds(40, 0, 180, 230);
+        jLabelFundo.setBounds(40, 0, 140, 140);
 
         btnAcessar.setText("Acessar");
         btnAcessar.addActionListener(new java.awt.event.ActionListener() {
@@ -66,7 +68,7 @@ public class JfrTelaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAcessar);
-        btnAcessar.setBounds(297, 160, 90, 23);
+        btnAcessar.setBounds(280, 100, 90, 23);
 
         btnSair.setText("Sair");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -75,21 +77,50 @@ public class JfrTelaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSair);
-        btnSair.setBounds(400, 160, 80, 23);
+        btnSair.setBounds(380, 100, 80, 23);
 
         jLabel1.setText("CPF:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(230, 90, 50, 20);
-        getContentPane().add(txtCPF);
-        txtCPF.setBounds(290, 90, 190, 20);
+        jLabel1.setBounds(230, 60, 50, 20);
 
-        setSize(new java.awt.Dimension(530, 277));
+        txtCPF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCPFKeyPressed(evt);
+            }
+        });
+        getContentPane().add(txtCPF);
+        txtCPF.setBounds(290, 60, 190, 20);
+
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyPressed(evt);
+            }
+        });
+        getContentPane().add(txtCodigo);
+        txtCodigo.setBounds(290, 30, 80, 20);
+
+        jLabel2.setText("Código:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(230, 30, 50, 20);
+
+        setSize(new java.awt.Dimension(522, 191));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
-        JfrTelaPrincipal p = new JfrTelaPrincipal();
-        p.setVisible(true);
+
+        String cpf = txtCPF.getText();
+        Aluno alunoRetorno = (Aluno) new AlunoDAO().consultarLogin(cpf);
+
+        if (alunoRetorno != null && alunoRetorno.getSituacao() == "Matriculado" && Validacao.validarCPF(alunoRetorno.getCpf())) {
+            JfrTelaPrincipal p = new JfrTelaPrincipal(alunoRetorno);
+            p.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "CPF inválido ou não cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+            txtCPF.setText("");
+            txtCPF.requestFocus();
+        }
 
         /* String user = txtfUsuario.getText();
         String senha = txtfSenha.getText();
@@ -116,17 +147,39 @@ public class JfrTelaLogin extends javax.swing.JFrame {
             String cpf = txtCPF.getText();
             Aluno alunoRetorno = (Aluno) new AlunoDAO().consultarLogin(cpf);
 
-            if (alunoRetorno != null && alunoRetorno.getSituacao() != 'i') {
+            if (alunoRetorno != null && alunoRetorno.getSituacao() == "Matriculado" && Validacao.validarCPF(alunoRetorno.getCpf())) {
                 JfrTelaPrincipal p = new JfrTelaPrincipal(alunoRetorno);
                 p.setVisible(true);
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "CPF inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "CPF inválido ou não cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
                 txtCPF.setText("");
                 txtCPF.requestFocus();
             }
         }
+        dispose();
     }//GEN-LAST:event_btnAcessarKeyPressed
+
+    private void txtCPFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCPFKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String cpf = txtCPF.getText();
+            Aluno alunoRetorno = (Aluno) new AlunoDAO().consultarLogin(cpf);
+
+            if (alunoRetorno != null && alunoRetorno.getSituacao().equals("Matriculado") && Validacao.validarCPF(alunoRetorno.getCpf())) {
+                JfrTelaPrincipal p = new JfrTelaPrincipal(alunoRetorno);
+                p.setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "CPF inválido ou não cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+                txtCPF.setText("");
+                txtCPF.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_txtCPFKeyPressed
+
+    private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoKeyPressed
 
     /**
      * @param args the command line arguments
@@ -168,7 +221,9 @@ public class JfrTelaLogin extends javax.swing.JFrame {
     private javax.swing.JButton btnAcessar;
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelFundo;
     private javax.swing.JTextField txtCPF;
+    private javax.swing.JTextField txtCodigo;
     // End of variables declaration//GEN-END:variables
 }

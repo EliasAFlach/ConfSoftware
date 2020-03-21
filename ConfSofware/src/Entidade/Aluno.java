@@ -15,7 +15,8 @@ public class Aluno {
     private String nome;
     private String cpf;
     private String endereco;
-    private char situacao;
+    private String situacao;
+    private String codigo;
 
     public int getId() {
         return id;
@@ -49,12 +50,19 @@ public class Aluno {
         this.endereco = endereco;
     }
     
-    public char getSituacao() {
+    public String getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(char situacao) {
+    public void setSituacao(String situacao) {
         this.situacao = situacao;
     }
-   
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }   
 }

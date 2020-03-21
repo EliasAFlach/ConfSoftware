@@ -1,4 +1,4 @@
-package apoio;
+package Apoio;
 
 /*
  * To change this template, choose Tools | Templates
@@ -21,11 +21,11 @@ public class ConexaoBD {
         try {
             // Carrega informações do arquivo de propriedades
             Properties prop = new Properties();
-            prop.load(new FileInputStream("db.properties"));
-            String dbdriver = prop.getProperty("db.driver");
-            String dburl = prop.getProperty("db.url");
-            String dbuser = prop.getProperty("db.user");
-            String dbsenha = prop.getProperty("db.senha");
+            //prop.load(new FileInputStream("db.properties"));
+            String dbdriver = "org.postgresql.Driver";
+            String dburl = "jdbc:postgresql://localhost:5432/ConfSoftware";
+            String dbuser = "postgres";
+            String dbsenha = "postgres";
 
             // Carrega Driver do Banco de Dados
             Class.forName(dbdriver);
