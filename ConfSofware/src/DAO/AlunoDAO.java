@@ -23,20 +23,20 @@ public class AlunoDAO implements IDAO {
 
     @Override
     public String salvar(Object o) {
-        Aluno usuario = (Aluno) o;
+        Aluno aluno = (Aluno) o;
 
         try {
 //          Statement st = bilhetario.Bilhetario.conexao.createStatement();
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
-            String sql = "INSERT INTO usuario VALUES ("
+            String sql = "INSERT INTO aluno (id, nome, CPF, endereco) VALUES ("
                     + "DEFAULT,"
-                    + "'" + usuario.getNome() + "',"
-                    + "'" + usuario.getSituacao() + "'"
-                    //                    + "'a'"
+                    + "'" + aluno.getNome() + "',"
+                    + "'" + aluno.getCpf()+ "',"
+                    + "'" + aluno.getEndereco()+ "'"
                     + ")";
 
-            System.out.println("Query SALVAR usuário: " + sql);
+            System.out.println("Query SALVAR aluno: " + sql);
             int resultado = st.executeUpdate(sql);
 
             if (resultado != 0) {
@@ -45,7 +45,7 @@ public class AlunoDAO implements IDAO {
                 return "xxx";
             }
         } catch (Exception e) {
-            System.out.println("Erro salvar usuário = " + e);
+            System.out.println("Erro salvar aluno = " + e);
             return e.toString();
         }
 
@@ -58,11 +58,11 @@ public class AlunoDAO implements IDAO {
         try {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
-            String sql = "UPDATE usuario "
+            String sql = "UPDATE aluno "
                     + "SET nome = '" + aluno.getNome() + "',"
-                    //                    + " usuario = '" + aluno.getAluno() + "',"
+                    //                    + " aluno = '" + aluno.getAluno() + "',"
                     //                    + " senha = MD5('" + aluno.getSenha() + "'),"
-                    //                    + " tipo_usuario = '" + aluno.getTipo_usuario() + "'"
+                    //                    + " tipo_aluno = '" + aluno.getTipo_aluno() + "'"
                     + "WHERE id = " + aluno.getId();
 
             int resultado = st.executeUpdate(sql);
@@ -74,7 +74,7 @@ public class AlunoDAO implements IDAO {
             }
 
         } catch (Exception e) {
-            System.out.println("Erro ao atualizar usuário: " + e);
+            System.out.println("Erro ao atualizar aluno: " + e);
             return e.toString();
         }
     }
@@ -84,8 +84,8 @@ public class AlunoDAO implements IDAO {
         try {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
-            String sql = "UPDATE usuario "
-                    + "SET situacao = 'i' "
+            String sql = "UPDATE aluno "
+                    + "SET status = 'i' "
                     + "WHERE id = " + id;
 
             int resultado = st.executeUpdate(sql);
@@ -93,11 +93,11 @@ public class AlunoDAO implements IDAO {
             if (resultado != 0) {
                 return null;
             } else {
-                return "erro ao excluir usuário";
+                return "erro ao excluir aluno";
             }
 
         } catch (Exception e) {
-            System.out.println("Erro ao atualizar usuário: " + e);
+            System.out.println("Erro ao atualizar aluno: " + e);
             return e.toString();
         }
     }
@@ -109,7 +109,7 @@ public class AlunoDAO implements IDAO {
 
     @Override
     public ArrayList<Object> consultar(String criterio) {
-        ArrayList<Object> usuariosUsers = new ArrayList<>();
+        ArrayList<Object> alunosUsers = new ArrayList<>();
 
         try {
             //Statement st = bilhetario.Bilhetario.conexao.createStatement();
@@ -123,18 +123,18 @@ public class AlunoDAO implements IDAO {
 
                     aluno.setId(resultado.getInt("id"));
                     aluno.setNome(resultado.getString("nome"));
-//                    usuario.setAluno(resultado.getString("usuario"));
-//                    usuario.setSenha(resultado.getString("senha"));
-//                    usuario.setTipo_usuario(resultado.getString("tipo_usuario"));
-                    aluno.setSituacao(resultado.getString("situacao"));
+//                    aluno.setAluno(resultado.getString("aluno"));
+//                    aluno.setSenha(resultado.getString("senha"));
+//                    aluno.setTipo_aluno(resultado.getString("tipo_aluno"));
+                    aluno.setSituacao(resultado.getString("status"));
 
-                    usuariosUsers.add(aluno);
+                    alunosUsers.add(aluno);
                 }
             }
         } catch (Exception e) {
-            System.out.println("Erro consultar usuários = " + e);
+            System.out.println("Erro consultar alunos = " + e);
         }
-        return usuariosUsers;
+        return alunosUsers;
     }
 
     @Override
@@ -143,27 +143,27 @@ public class AlunoDAO implements IDAO {
 
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
-            String sql = "SELECT * FROM usuario "
+            String sql = "SELECT * FROM aluno "
                     + "WHERE id = " + id;
 
             ResultSet resultado = st.executeQuery(sql);
 
             if (resultado.next()) {
-                Aluno usuario = new Aluno();
-                usuario.setId(id);
-                usuario.setId(resultado.getInt("id"));
-                usuario.setNome(resultado.getString("nome"));
-//                usuario.setAluno(resultado.getString("usuario"));
-//                usuario.setSenha(resultado.getString("senha"));
-//                usuario.setTipo_usuario(resultado.getString("tipo_usuario"));
-                usuario.setSituacao(resultado.getString("situacao"));
-                return usuario;
+                Aluno aluno = new Aluno();
+                aluno.setId(id);
+                aluno.setId(resultado.getInt("id"));
+                aluno.setNome(resultado.getString("nome"));
+//                aluno.setAluno(resultado.getString("aluno"));
+//                aluno.setSenha(resultado.getString("senha"));
+//                aluno.setTipo_aluno(resultado.getString("tipo_aluno"));
+                aluno.setSituacao(resultado.getString("status"));
+                return aluno;
             } else {
                 return null;
             }
 
         } catch (Exception e) {
-            System.out.println("Erro ao consultar usuario: " + e);
+            System.out.println("Erro ao consultar aluno: " + e);
             return null;
         }
     }
@@ -192,51 +192,50 @@ public class AlunoDAO implements IDAO {
             }
 
         } catch (Exception e) {
-            System.out.println("Erro ao consultar usuario: " + e);
+            System.out.println("Erro ao consultar aluno: " + e);
             return null;
         }
     }
 
-    public void popularTabela(JTable tabela, String nome, String usuario) {
-        ResultSet resultadoQ;
+    public void popularTabela(JTable tblAluno, String text) {
+                ResultSet resultadoQ;
 
-        // dados da tabela
+        // dados da tblAluno
         Object[][] dadosTabela = null;
 
-        // cabecalho da tabela
+        // cabecalho da tblAluno
         Object[] cabecalho = new Object[3];
         cabecalho[0] = "ID";
         cabecalho[1] = "Nome";
-        cabecalho[2] = "Usuário";
-
-        // cria matriz de acordo com nº de registros da tabela
+        cabecalho[2] = "CPF";
+        // cria matriz de acordo com nº de registros da tblAluno
         try {
             resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(""
-                    + "SELECT count(*) FROM usuario "
-                    + "WHERE nome ILIKE '%" + nome + "%' AND usuario ILIKE '%" + usuario + "%' AND situacao = 'a'");
+                    + "SELECT count(*) FROM aluno "
+                    + "WHERE nome ILIKE '%" + text +"%'");
 
             resultadoQ.next();
 
             dadosTabela = new Object[resultadoQ.getInt(1)][3];
 
         } catch (Exception e) {
-            System.out.println("Erro ao consultar usuário: " + e);
+            System.out.println("Erro ao consultar aluno: " + e);
         }
 
         int lin = 0;
 
-        // efetua consulta na tabela
+        // efetua consulta na tblAluno
         try {
             resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(""
-                    + "SELECT * FROM usuario "
-                    + "WHERE nome ILIKE '%" + nome + "%' AND usuario ILIKE '%" + usuario + "%' AND situacao = 'a'"
-                    + "ORDER BY id ASC");
+                    + "SELECT * FROM aluno "
+                    + "WHERE nome ILIKE '%" + text
+                    + "%' ORDER BY id ASC");
 
             while (resultadoQ.next()) {
 
                 dadosTabela[lin][0] = resultadoQ.getObject("id");
                 dadosTabela[lin][1] = resultadoQ.getObject("nome");
-                dadosTabela[lin][2] = resultadoQ.getObject("usuario");
+                dadosTabela[lin][2] = resultadoQ.getObject("cpf");
 
                 // caso a coluna precise exibir uma imagem
 //                if (resultadoQ.getBoolean("Situacao")) {
@@ -247,14 +246,14 @@ public class AlunoDAO implements IDAO {
                 lin++;
             }
         } catch (Exception e) {
-            System.out.println("problemas para popular tabela...");
+            System.out.println("problemas para popular tblAluno...");
             System.out.println(e);
         }
 
-        // configuracoes adicionais no componente tabela
-        tabela.setModel(new DefaultTableModel(dadosTabela, cabecalho) {
+        // configuracoes adicionais no componente tblAluno
+        tblAluno.setModel(new DefaultTableModel(dadosTabela, cabecalho) {
             @Override
-            // quando retorno for FALSE, a tabela nao é editavel
+            // quando retorno for FALSE, a tblAluno nao é editavel
             public boolean isCellEditable(int row, int column) {
                 return false;
                 /*  
@@ -277,13 +276,13 @@ public class AlunoDAO implements IDAO {
             }
         });
 
-        // permite seleção de apenas uma linha da tabela
-        tabela.setSelectionMode(0);
+        // permite seleção de apenas uma linha da tblAluno
+        tblAluno.setSelectionMode(0);
 
-        // redimensiona as colunas de uma tabela
+        // redimensiona as colunas de uma tblAluno
         TableColumn column = null;
-        for (int i = 0; i < tabela.getColumnCount(); i++) {
-            column = tabela.getColumnModel().getColumn(i);
+        for (int i = 0; i < tblAluno.getColumnCount(); i++) {
+            column = tblAluno.getColumnModel().getColumn(i);
             switch (i) {
                 case 0:
                     column.setPreferredWidth(17);
