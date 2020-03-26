@@ -49,6 +49,8 @@ public class JfrTelaPrincipal extends javax.swing.JFrame {
         BtnCadastroCliente = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        btnCadastroTurma = new javax.swing.JButton();
+        btnCadastroDisciplina = new javax.swing.JButton();
         MenuManutencao = new javax.swing.JMenuBar();
         jMenuRelatórios = new javax.swing.JMenu();
         MenuRelatorioCompraCliente = new javax.swing.JMenuItem();
@@ -88,6 +90,24 @@ public class JfrTelaPrincipal extends javax.swing.JFrame {
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
+
+        btnCadastroTurma.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Cadastros.png"))); // NOI18N
+        btnCadastroTurma.setText("Turma");
+        btnCadastroTurma.setToolTipText("Cadastro de Clientes");
+        btnCadastroTurma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastroTurmaActionPerformed(evt);
+            }
+        });
+
+        btnCadastroDisciplina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Eventos.png"))); // NOI18N
+        btnCadastroDisciplina.setText("Disciplina");
+        btnCadastroDisciplina.setToolTipText("Cadastro de Clientes");
+        btnCadastroDisciplina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastroDisciplinaActionPerformed(evt);
+            }
+        });
 
         jMenuRelatórios.setText("Relatórios");
 
@@ -142,10 +162,13 @@ public class JfrTelaPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addComponent(BtnCadastroCliente)
+                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnCadastroDisciplina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnCadastroCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCadastroTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(73, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,7 +179,11 @@ public class JfrTelaPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BtnCadastroCliente)
-                        .addGap(0, 414, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCadastroDisciplina)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCadastroTurma)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jDesktopPane1)
@@ -246,6 +273,18 @@ public class JfrTelaPrincipal extends javax.swing.JFrame {
         ifrUsuario.setVisible(true);
     }//GEN-LAST:event_BtnCadastroClienteActionPerformed
 
+    private void btnCadastroTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroTurmaActionPerformed
+        IfrTurma IfrTurma = new IfrTurma();
+        jDesktopPane1.add(IfrTurma);
+        IfrTurma.setVisible(true);
+    }//GEN-LAST:event_btnCadastroTurmaActionPerformed
+
+    private void btnCadastroDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroDisciplinaActionPerformed
+        IfrDisciplina IfrDisciplina = new IfrDisciplina();
+        jDesktopPane1.add(IfrDisciplina);
+        IfrDisciplina.setVisible(true);
+    }//GEN-LAST:event_btnCadastroDisciplinaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -289,6 +328,8 @@ public class JfrTelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuRelEventosValor;
     private javax.swing.JMenuItem MenuRelUsuarios;
     private javax.swing.JMenuItem MenuRelatorioCompraCliente;
+    private javax.swing.JButton btnCadastroDisciplina;
+    private javax.swing.JButton btnCadastroTurma;
     private javax.swing.JButton btnSair;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JInternalFrame jInternalFrame1;
