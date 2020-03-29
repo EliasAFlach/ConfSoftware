@@ -23,7 +23,7 @@ public class CombosDAO {
 
         ComboItens item = new ComboItens();
         item.setCodigo(0);
-        item.setDescricao("Selecione");
+        item.setDescricao("Selecione...");
         combo.addItem(item);
 
         try {
@@ -76,7 +76,7 @@ public class CombosDAO {
         }
     }
 
-    public void definirItemCombo(JComboBox combo, ComboItens item) {
+    public static void definirItemCombo(JComboBox combo, ComboItens item) {
         for (int i = 0; i < combo.getItemCount(); i++) {
             if (((ComboItens) combo.getItemAt(i)).getCodigo() == (item.getCodigo())) {
                 combo.setSelectedIndex(i);

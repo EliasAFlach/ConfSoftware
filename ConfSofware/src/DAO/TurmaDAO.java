@@ -63,8 +63,8 @@ public class TurmaDAO implements IDAO {
         try {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
-            String sql = "UPDATE turma"
-                    + "SET  codigo = '" + turma.getCodigo() + "',"
+            String sql = "UPDATE turma "
+                    + " SET  codigo = '" + turma.getCodigo() + "',"
                     + "     quant_alunos = " + turma.getQuantidadeAlunos()+ ", "
                     + "     disciplina_id = " + turma.getDisciplina() + ", "                    
                     + "     turno = '" + turma.getTurno()+ "', "
@@ -72,7 +72,7 @@ public class TurmaDAO implements IDAO {
                     + "     professor = '" + turma.getProfessor()+ "', "
                     + "     datainivigencia = '" + turma.getDataInicio()+ "', "
                     + "     datafimvigencia = '" + turma.getDataFim()+ "' "
-                    + "WHERE id = " + turma.getId();
+                    + " WHERE id = " + turma.getId();
 
             int resultado = st.executeUpdate(sql);
 
@@ -209,7 +209,7 @@ public class TurmaDAO implements IDAO {
 
             resultadoQ.next();
 
-            dadosTabela = new Object[resultadoQ.getInt(1)][9];
+            dadosTabela = new Object[resultadoQ.getInt(1)][10];
 
         } catch (Exception e) {
             System.out.println("Erro ao consultar turma: " + e);
@@ -223,7 +223,7 @@ public class TurmaDAO implements IDAO {
                     + " SELECT t.id, t.codigo, t.quant_alunos, d.nome, t.disciplina_id, t.turno, t.regime, t.professor, t.datainivigencia, t.datafimvigencia " 
                     + " FROM turma t, disciplina d"
                     + " WHERE t.codigo ILIKE '%" + text
-                    + "%' ORDER BY id ASC");
+                    + "%' AND t.disciplina_id = d.id ORDER BY id ASC");
 
             while (resultadoQ.next()) {
 

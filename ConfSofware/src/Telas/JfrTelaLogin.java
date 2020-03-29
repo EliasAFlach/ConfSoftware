@@ -115,7 +115,9 @@ public class JfrTelaLogin extends javax.swing.JFrame {
 
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
         JfrTelaPrincipal p = new JfrTelaPrincipal();
-        p.setVisible(true);
+         p.setExtendedState(p.MAXIMIZED_BOTH); 
+                p.setUndecorated(true);
+                p.setVisible(true);
 
         /*
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -124,6 +126,8 @@ public class JfrTelaLogin extends javax.swing.JFrame {
 
             if (alunoRetorno != null && alunoRetorno.getSituacao() != "Matriculado" && Validacao.validarCPF(alunoRetorno.getCpf())) {
                 JfrTelaPrincipal p = new JfrTelaPrincipal(alunoRetorno);
+                p.setExtendedState(p.MAXIMIZED_BOTH); 
+                p.setUndecorated(true);
                 p.setVisible(true);
                 dispose();
             } else {
@@ -146,6 +150,8 @@ public class JfrTelaLogin extends javax.swing.JFrame {
 
             if (alunoRetorno != null && alunoRetorno.getSituacao() != "Matriculado" && Validacao.validarCPF(alunoRetorno.getCpf())) {
                 JfrTelaPrincipal p = new JfrTelaPrincipal(alunoRetorno);
+                p.setExtendedState(p.MAXIMIZED_BOTH); 
+                p.setUndecorated(true);
                 p.setVisible(true);
                 dispose();
             } else {
@@ -171,8 +177,10 @@ public class JfrTelaLogin extends javax.swing.JFrame {
 
             if (alunoRetorno != null && alunoRetorno.getSituacao() != "Matriculado" && Validacao.validarCPF(alunoRetorno.getCpf())) {
                 JfrTelaPrincipal p = new JfrTelaPrincipal(alunoRetorno);
-                p.setVisible(true);
-                dispose();
+                 p.setExtendedState(p.MAXIMIZED_BOTH); 
+                 p.setUndecorated(true);
+                 p.setVisible(true);
+                 dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "CPF inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
                 txtCPF.setText("");

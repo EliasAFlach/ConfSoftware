@@ -5,6 +5,8 @@
  */
 package Telas;
 
+import Apoio.ComboItens;
+import Apoio.CombosDAO;
 import Entidade.Usuario;
 import javax.swing.JOptionPane;
 import Apoio.Formatacao;
@@ -15,6 +17,7 @@ import DAO.TurmaDAO;
 import Entidade.Aluno;
 import Entidade.Disciplina;
 import Entidade.Turma;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 
 /**
@@ -23,7 +26,7 @@ import javax.swing.JFormattedTextField;
  */
 public class IfrTurma extends javax.swing.JInternalFrame {
 
-    int codigo = 0;
+    int id = 0;
 
     /**
      * Creates new form IfrUsuario
@@ -33,6 +36,22 @@ public class IfrTurma extends javax.swing.JInternalFrame {
         this.setTitle("Turmas");
         new TurmaDAO().popularTabela(tblTurma, txtCriterio.getText());
         
+        CombosDAO cmbDisciplina = new CombosDAO();
+
+        cmbDisciplina.popularCombo("disciplina", this.cmbDisciplina, "id", "nome");
+        
+        cmbRegime.removeAllItems();
+        cmbRegime.addItem("Selecione...");
+        cmbRegime.addItem("Presencial");
+        cmbRegime.addItem("SemiPresencial");
+        cmbRegime.addItem("EAD");
+         
+        cmbTurno.removeAllItems();
+        cmbTurno.addItem("Selecione...");
+        cmbTurno.addItem("Matituno");
+        cmbTurno.addItem("Vespertino");
+        cmbTurno.addItem("Noturno");
+         
         
     }
 
@@ -76,6 +95,7 @@ public class IfrTurma extends javax.swing.JInternalFrame {
         cmbDisciplina = new javax.swing.JComboBox<>();
         btnEditar = new javax.swing.JButton();
         tfdExcluir = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
 
         btnFechar.setText("Fechar");
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +141,7 @@ public class IfrTurma extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCriterio, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                        .addComponent(txtCriterio, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btnPesquisar)))
                 .addContainerGap())
@@ -255,7 +275,7 @@ public class IfrTurma extends javax.swing.JInternalFrame {
                 .addGap(55, 55, 55)
                 .addComponent(jLabel1)
                 .addGap(52, 52, 52)
-                .addComponent(validacao, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addComponent(validacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(175, 175, 175))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
@@ -296,10 +316,17 @@ public class IfrTurma extends javax.swing.JInternalFrame {
             }
         });
 
-        tfdExcluir.setText("Ativar / Desativar");
+        tfdExcluir.setText("Excluir");
         tfdExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfdExcluirActionPerformed(evt);
+            }
+        });
+
+        btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
             }
         });
 
@@ -308,7 +335,13 @@ public class IfrTurma extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(196, 196, 196)
+                .addComponent(btnLimpar)
+                .addGap(18, 18, 18)
                 .addComponent(btnEditar)
                 .addGap(18, 18, 18)
                 .addComponent(btnSalvar)
@@ -316,23 +349,20 @@ public class IfrTurma extends javax.swing.JInternalFrame {
                 .addComponent(tfdExcluir)
                 .addGap(26, 26, 26)
                 .addComponent(btnFechar)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(207, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFechar)
                     .addComponent(btnSalvar)
                     .addComponent(btnEditar)
-                    .addComponent(tfdExcluir))
+                    .addComponent(tfdExcluir)
+                    .addComponent(btnLimpar))
                 .addContainerGap())
         );
 
@@ -346,34 +376,34 @@ public class IfrTurma extends javax.swing.JInternalFrame {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         int valida = validaDados();
         if (valida != 0) {
-              JOptionPane.showMessageDialog(null, "Problemas ao salvar registro! Verifique os dados informados\n\n"
-                    );
-        }
-        Turma turma = new Turma();
-        guardaDados(turma);
-    
-        TurmaDAO turmaDAO = new TurmaDAO();
-
-        String retorno = null;
-
-        if (codigo == 0) {
-            retorno = turmaDAO.salvar(turma);
-        } else {
-            turma.setId(codigo);
-            retorno = turmaDAO.atualizar(turma);
-        }
-        
-        if (retorno == null) {
-            JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
-            limpaDados();
-            codigo = 0;
-            new TurmaDAO().popularTabela(tblTurma, txtCriterio.getText());
-        } else {
-
             JOptionPane.showMessageDialog(null, "Problemas ao salvar registro! Verifique os dados informados\n\n"
-                    + "Mensagem técnica:\n" + retorno);
-        }
+                    );
+        } else {
+            Turma turma = new Turma();
+            guardaDados(turma);
+        
+          TurmaDAO turmaDAO = new TurmaDAO();
 
+          String retorno = null;
+
+           if (id == 0) {
+              retorno = turmaDAO.salvar(turma);
+           } else {
+               turma.setId(id);
+               retorno = turmaDAO.atualizar(turma);
+           }
+        
+           if (retorno == null) {
+               JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
+               limpaDados();
+               id = 0;
+               new TurmaDAO().popularTabela(tblTurma, txtCriterio.getText());
+            } else {
+
+             JOptionPane.showMessageDialog(null, "Problemas ao salvar registro! Verifique os dados informados\n\n"
+                        + "Mensagem técnica:\n" + retorno);
+            }
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -394,8 +424,8 @@ public class IfrTurma extends javax.swing.JInternalFrame {
 
         String valor = String.valueOf(tblTurma.getValueAt(tblTurma.getSelectedRow(), 0));
         Turma a = (Turma) new TurmaDAO().consultarId(Integer.parseInt(valor));
-        codigo = a.getId();
-        String retorno = new TurmaDAO().excluir(codigo);
+        id = a.getId();
+        String retorno = new TurmaDAO().excluir(id);
 
         if (retorno == null) {
             JOptionPane.showMessageDialog(null, "Excluido com sucesso");
@@ -426,10 +456,15 @@ public class IfrTurma extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataFimActionPerformed
 
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limpaDados();
+    }//GEN-LAST:event_btnLimparActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnFechar;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -469,8 +504,8 @@ public class IfrTurma extends javax.swing.JInternalFrame {
         turma.setCodigo(txtCodigo.getText());
         turma.setQuantidadeAlunos(Integer.parseInt(txtQuantidadeAlunos.getText()));
         
-        Disciplina disciplina = (Disciplina) cmbDisciplina.getSelectedItem();
-        turma.setDisciplina(disciplina.getId());
+        ComboItens item = (ComboItens) cmbDisciplina.getSelectedItem();
+        turma.setDisciplina(item.getCodigo());
         
         turma.setTurno(cmbTurno.getSelectedItem().toString());
         turma.setRegime(cmbRegime.getSelectedItem().toString());
@@ -518,6 +553,7 @@ public class IfrTurma extends javax.swing.JInternalFrame {
     }
     
     private void limpaDados() {
+        id = 0;
         txtCodigo.setText("");
         txtCriterio.setText("");
         txtDataInicio.setText("");
@@ -531,12 +567,18 @@ public class IfrTurma extends javax.swing.JInternalFrame {
     }
     
     private void alteraDados(Turma turma) {
+        id = turma.getId();
         txtCodigo.setText(turma.getCodigo());
         txtQuantidadeAlunos.setText(turma.getQuantidadeAlunos() + "");
         
         Disciplina disciplina = new Disciplina();
         disciplina = (Disciplina) new DisciplinaDAO().consultarId(turma.getDisciplina());
-        cmbDisciplina.setSelectedItem(disciplina.getId());
+        
+        ComboItens combo = new ComboItens();
+        combo.setCodigo(disciplina.getId());
+        combo.setDescricao(disciplina.getNome());
+        
+        Apoio.CombosDAO.definirItemCombo(cmbDisciplina, combo);
         
         cmbRegime.setSelectedItem(turma.getRegime());
         cmbTurno.setSelectedItem(turma.getTurno());
