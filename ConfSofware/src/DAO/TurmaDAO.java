@@ -53,7 +53,39 @@ public class TurmaDAO implements IDAO {
             System.out.println("Erro salvar turma = " + e);
             return e.toString();
         }
+    }
+    
+    public String salvarTeste(Object o) {
+        Turma turma = (Turma) o;
 
+        try {
+//          Statement st = bilhetario.Bilhetario.conexao.createStatement();
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = "INSERT INTO turmaTeste (id, codigo, quant_alunos, disciplina_id, turno, regime, professor, datainivigencia, datafimvigencia) VALUES ("
+                    + "DEFAULT,"
+                    + "'" + turma.getCodigo() + "',"
+                    + " " + turma.getQuantidadeAlunos()+ ", "
+                    + " " + turma.getDisciplina() + ", "                    
+                    + "'" + turma.getTurno()+ "', "
+                    + "'" + turma.getRegime()+ "', "
+                    + "'" + turma.getProfessor()+ "', "
+                    + "'" + turma.getDataInicio()+ "', "
+                    + "'" + turma.getDataFim()+ "' "
+                    + ")";
+
+            System.out.println("Query SALVAR turma: " + sql);
+            int resultado = st.executeUpdate(sql);
+
+            if (resultado != 0) {
+                return null;
+            } else {
+                return "xxx";
+            }
+        } catch (Exception e) {
+            System.out.println("Erro salvar turma = " + e);
+            return e.toString();
+        }
     }
 
     @Override
@@ -95,6 +127,27 @@ public class TurmaDAO implements IDAO {
 
             String sql = " DELETE FROM turma "
                        + " WHERE id = " + id;
+
+            int resultado = st.executeUpdate(sql);
+
+            if (resultado != 0) {
+                return null;
+            } else {
+                return "erro ao excluir turma";
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro ao atualizar turma: " + e);
+            return e.toString();
+        }
+    }
+    
+     public String excluirTeste(String id) {
+        try {
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = " DELETE FROM turmaTeste "
+                       + " WHERE codigo = '" + id + "' ";
 
             int resultado = st.executeUpdate(sql);
 
@@ -172,6 +225,38 @@ public class TurmaDAO implements IDAO {
                turma.setDataInicio(resultado.getString("datainivigencia"));
                turma.setDataFim(resultado.getString("datafimvigencia"));
                return turma;
+            } else {
+                return null;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro ao consultar turma: " + e);
+            return null;
+        }
+    }
+    
+    public Object consultarIdTeste(String id) {
+        try {
+
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = "SELECT * FROM turmaTeste "
+                    + "WHERE codigo = '" + id + "' ";
+
+            ResultSet resultado = st.executeQuery(sql);
+
+            if (resultado.next()) {
+                Turma turma = new Turma();
+               turma.setId(resultado.getInt("id"));
+               turma.setCodigo(resultado.getString("codigo"));
+               turma.setQuantidadeAlunos(resultado.getInt("quant_alunos"));
+               turma.setDisciplina(resultado.getInt("disciplina_id"));
+               turma.setTurno(resultado.getString("turno"));
+               turma.setRegime(resultado.getString("regime"));
+               turma.setProfessor(resultado.getString("professor"));
+               turma.setDataInicio(resultado.getString("datainivigencia"));
+               turma.setDataFim(resultado.getString("datafimvigencia"));
+               return "ok";
             } else {
                 return null;
             }
