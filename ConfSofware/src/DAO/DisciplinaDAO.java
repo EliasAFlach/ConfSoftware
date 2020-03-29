@@ -7,6 +7,7 @@ package DAO;
 
 import Apoio.IDAO;
 import Apoio.ConexaoBD;
+import Entidade.Disciplina;
 import Entidade.Turma;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -19,7 +20,7 @@ import javax.swing.table.TableColumn;
  *
  * @author Elias Flach
  */
-public class TurmaDAO implements IDAO {
+public class DisciplinaDAO implements IDAO {
 
     @Override
     public String salvar(Object o) {
@@ -155,23 +156,17 @@ public class TurmaDAO implements IDAO {
 
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
-            String sql = "SELECT * FROM turma "
+            String sql = "SELECT * FROM disciplina "
                     + "WHERE id = " + id;
 
             ResultSet resultado = st.executeQuery(sql);
 
             if (resultado.next()) {
-                Turma turma = new Turma();
-               turma.setId(resultado.getInt("id"));
-               turma.setCodigo(resultado.getString("codigo"));
-               turma.setQuantidadeAlunos(resultado.getInt("quant_alunos"));
-               turma.setDisciplina(resultado.getInt("disciplina_id"));
-               turma.setTurno(resultado.getString("turno"));
-               turma.setRegime(resultado.getString("regime"));
-               turma.setProfessor(resultado.getString("professor"));
-               turma.setDataInicio(resultado.getString("datainivigencia"));
-               turma.setDataFim(resultado.getString("datafimvigencia"));
-               return turma;
+               Disciplina disciplina = new Disciplina();
+               disciplina.setId(resultado.getInt("id"));
+               disciplina.setNome(resultado.getString("nome"));
+               disciplina.setCarga(resultado.getInt("carga_horaria"));
+               return disciplina;
             } else {
                 return null;
             }
@@ -189,7 +184,7 @@ public class TurmaDAO implements IDAO {
         Object[][] dadosTabela = null;
 
         // cabecalho da tblAluno
-        Object[] cabecalho = new Object[10];
+        Object[] cabecalho = new Object[3];
         cabecalho[0] = "ID";
         cabecalho[1] = "Codigo";
         cabecalho[2] = "Quant. Alunos";

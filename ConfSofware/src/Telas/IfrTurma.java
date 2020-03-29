@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import Apoio.Formatacao;
 import static Apoio.Formatacao.isNumeric;
 import Apoio.Validacao;
+import DAO.DisciplinaDAO;
 import DAO.TurmaDAO;
 import Entidade.Aluno;
 import Entidade.Disciplina;
@@ -31,6 +32,8 @@ public class IfrTurma extends javax.swing.JInternalFrame {
         initComponents();
         this.setTitle("Turmas");
         new TurmaDAO().popularTabela(tblTurma, txtCriterio.getText());
+        
+        
     }
 
     /** 
@@ -118,7 +121,7 @@ public class IfrTurma extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCriterio, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+                        .addComponent(txtCriterio, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btnPesquisar)))
                 .addContainerGap())
@@ -383,37 +386,22 @@ public class IfrTurma extends javax.swing.JInternalFrame {
         Turma a = (Turma) new TurmaDAO().consultarId(Integer.parseInt(valor));
 
         alteraDados(a);
-        tfdNome.setText(a.getNome());
-        tfdCPF.setText(a.getCpf());
-        tfdEndereço.setText(a.getEndereco());
-//        if (u.getSexo() == 'M') {
-//            jRadioButton1.setSelected(true);
-//        }
-//        if (u.getSexo() == 'F') {
-//            jRadioButton2.setSelected(true);
-//        }
-//        tfdDataNascimento.setText(Formatacao.ajustaDataDMA(u.getData_nascimento()));
 
-//        System.out.println(u.getData_nascimento());
-//        System.out.println(Formatacao.ajustaDataDMA(u.getData_nascimento()));
-
-        codigo = a.getId();
-
-        jTabbedPane1.setSelectedIndex(0);
+        jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void tfdExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdExcluirActionPerformed
 
         String valor = String.valueOf(tblTurma.getValueAt(tblTurma.getSelectedRow(), 0));
-        Aluno a = (Aluno) new AlunoDAO().consultarId(Integer.parseInt(valor));
+        Turma a = (Turma) new TurmaDAO().consultarId(Integer.parseInt(valor));
         codigo = a.getId();
-        String retorno = new AlunoDAO().excluir(codigo);
+        String retorno = new TurmaDAO().excluir(codigo);
 
         if (retorno == null) {
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso");
-            new AlunoDAO().popularTabela(tblTurma, "");
+            JOptionPane.showMessageDialog(null, "Excluido com sucesso");
+            new TurmaDAO().popularTabela(tblTurma, "");
         } else {
-            JOptionPane.showMessageDialog(null, "Erro ao alterar aluno");
+            JOptionPane.showMessageDialog(null, "Erro ao excluir turma");
         }
 
     }//GEN-LAST:event_tfdExcluirActionPerformed
@@ -486,9 +474,9 @@ public class IfrTurma extends javax.swing.JInternalFrame {
         
         turma.setTurno(cmbTurno.getSelectedItem().toString());
         turma.setRegime(cmbRegime.getSelectedItem().toString());
-        turma.setProfessor(txtCodigo.getText());
-        turma.setDataInicio(txtCodigo.getText());
-        turma.setDataFim(txtCodigo.getText());
+        turma.setProfessor(txtProfessor.getText());
+        turma.setDataInicio(txtDataInicio.getText());
+        turma.setDataFim(txtDataFim.getText());
     }
     
     private int validaDados() {
@@ -546,18 +534,16 @@ public class IfrTurma extends javax.swing.JInternalFrame {
         txtCodigo.setText(turma.getCodigo());
         txtQuantidadeAlunos.setText(turma.getQuantidadeAlunos() + "");
         
-        cmb
+        Disciplina disciplina = new Disciplina();
+        disciplina = (Disciplina) new DisciplinaDAO().consultarId(turma.getDisciplina());
+        cmbDisciplina.setSelectedItem(disciplina.getId());
         
-         turma.setCodigo(txtCodigo.getText());
-        turma.setQuantidadeAlunos(Integer.parseInt(txtQuantidadeAlunos.getText()));
+        cmbRegime.setSelectedItem(turma.getRegime());
+        cmbTurno.setSelectedItem(turma.getTurno());
         
-        Disciplina disciplina = (Disciplina) cmbDisciplina.getSelectedItem();
-        turma.setDisciplina(disciplina.getId());
-        
-        turma.setTurno(cmbTurno.getSelectedItem().toString());
-        turma.setRegime(cmbRegime.getSelectedItem().toString());
-        turma.setProfessor(txtCodigo.getText());
-        turma.setDataInicio(txtCodigo.getText());
-        turma.setDataFim(txtCodigo.getText());
+        txtProfessor.setText(turma.getProfessor());
+        txtDataInicio.setText(turma.getDataInicio());
+        txtDataFim.setText(turma.getDataFim());
+       
     }
 }
