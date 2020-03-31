@@ -59,7 +59,7 @@ public class AlunoDAO implements IDAO {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
             String sql = "UPDATE aluno "
-                    + "SET nome = '" + aluno.getNome() + "',"
+                    + "SET nome = '" + aluno.getNome() + "'"
                     //                    + " aluno = '" + aluno.getAluno() + "',"
                     //                    + " senha = MD5('" + aluno.getSenha() + "'),"
                     //                    + " tipo_aluno = '" + aluno.getTipo_aluno() + "'"
@@ -85,10 +85,11 @@ public class AlunoDAO implements IDAO {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
             String sql = "UPDATE aluno "
-                    + "SET status = 'i' "
+                    + "SET status = 'Cancelado' "
                     + "WHERE id = " + id;
 
             int resultado = st.executeUpdate(sql);
+            System.out.println(sql);
 
             if (resultado != 0) {
                 return null;
@@ -204,10 +205,11 @@ public class AlunoDAO implements IDAO {
         Object[][] dadosTabela = null;
 
         // cabecalho da tblAluno
-        Object[] cabecalho = new Object[3];
+        Object[] cabecalho = new Object[4];
         cabecalho[0] = "ID";
         cabecalho[1] = "Nome";
         cabecalho[2] = "CPF";
+        cabecalho[3] = "Status";
         // cria matriz de acordo com nº de registros da tblAluno
         try {
             resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(""
@@ -216,7 +218,7 @@ public class AlunoDAO implements IDAO {
 
             resultadoQ.next();
 
-            dadosTabela = new Object[resultadoQ.getInt(1)][3];
+            dadosTabela = new Object[resultadoQ.getInt(1)][4];
 
         } catch (Exception e) {
             System.out.println("Erro ao consultar aluno: " + e);
@@ -236,6 +238,9 @@ public class AlunoDAO implements IDAO {
                 dadosTabela[lin][0] = resultadoQ.getObject("id");
                 dadosTabela[lin][1] = resultadoQ.getObject("nome");
                 dadosTabela[lin][2] = resultadoQ.getObject("cpf");
+                dadosTabela[lin][3] = resultadoQ.getObject("status");
+
+                
 
                 // caso a coluna precise exibir uma imagem
 //                if (resultadoQ.getBoolean("Situacao")) {

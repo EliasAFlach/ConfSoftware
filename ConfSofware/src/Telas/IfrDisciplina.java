@@ -5,13 +5,14 @@
  */
 package Telas;
 
-import DAO.AlunoDAO;
+import DAO.DisciplinaDAO;
 import Entidade.Usuario;
 import javax.swing.JOptionPane;
 import Apoio.Formatacao;
 import static Apoio.Formatacao.isNumeric;
 import Apoio.Validacao;
 import Entidade.Aluno;
+import Entidade.Disciplina;
 import javax.swing.JFormattedTextField;
 
 /**
@@ -27,9 +28,9 @@ public class IfrDisciplina extends javax.swing.JInternalFrame {
      */
     public IfrDisciplina() {
         initComponents();
-        Formatacao.formatarCpf(tfdCPF);
-        this.setTitle("Alunos");
-        new AlunoDAO().popularTabela(tblAluno, tfdCriterio.getText());
+        Validacao.validarNumbersOnly(tfdCargaHoraria, validacao);
+        this.setTitle("Disciplina");
+        new DisciplinaDAO().popularTabela(tblDisciplina, tfdCriterio.getText());
     }
 
     /** 
@@ -49,19 +50,19 @@ public class IfrDisciplina extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        tfdNome = new javax.swing.JTextField();
-        tfdEndereço = new javax.swing.JTextField();
         validacao = new javax.swing.JLabel();
-        tfdCPF = new javax.swing.JFormattedTextField();
+        tfdCargaHoraria = new javax.swing.JTextField();
+        tfdNome = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblAluno = new javax.swing.JTable();
+        tblDisciplina = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         tfdCriterio = new javax.swing.JTextField();
         btnPesquisar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         tfdExcluir = new javax.swing.JButton();
+
+        setTitle("Disciplina");
 
         btnFechar.setText("Fechar");
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -79,30 +80,17 @@ public class IfrDisciplina extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Nome*");
 
-        jLabel4.setText("CPF*");
+        jLabel4.setText("Carga horaria*");
 
-        jLabel5.setText("Endereço*");
+        tfdCargaHoraria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdCargaHorariaActionPerformed(evt);
+            }
+        });
 
         tfdNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfdNomeActionPerformed(evt);
-            }
-        });
-
-        tfdEndereço.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdEndereçoActionPerformed(evt);
-            }
-        });
-        tfdEndereço.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfdEndereçoKeyTyped(evt);
-            }
-        });
-
-        tfdCPF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfdCPFActionPerformed(evt);
             }
         });
 
@@ -112,24 +100,22 @@ public class IfrDisciplina extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(134, 134, 134)))
+                        .addGap(134, 134, 134))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(tfdEndereço, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(400, 400, 400)
                         .addComponent(validacao, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tfdCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -144,19 +130,15 @@ public class IfrDisciplina extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfdCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdCargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(validacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(tfdEndereço, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(validacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(174, 174, 174))
         );
 
         jTabbedPane1.addTab("Cadastro", jPanel1);
 
-        tblAluno.setModel(new javax.swing.table.DefaultTableModel(
+        tblDisciplina.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -164,7 +146,7 @@ public class IfrDisciplina extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblAluno);
+        jScrollPane1.setViewportView(tblDisciplina);
 
         jLabel2.setText("Nome");
 
@@ -186,7 +168,7 @@ public class IfrDisciplina extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfdCriterio, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+                        .addComponent(tfdCriterio, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btnPesquisar)))
                 .addContainerGap())
@@ -227,7 +209,7 @@ public class IfrDisciplina extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 217, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnEditar)
                         .addGap(18, 18, 18)
                         .addComponent(btnSalvar)
@@ -236,7 +218,7 @@ public class IfrDisciplina extends javax.swing.JInternalFrame {
                         .addGap(26, 26, 26)
                         .addComponent(btnFechar))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -244,14 +226,14 @@ public class IfrDisciplina extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFechar)
                     .addComponent(btnSalvar)
                     .addComponent(btnEditar)
                     .addComponent(tfdExcluir))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -262,36 +244,36 @@ public class IfrDisciplina extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        Aluno aluno = new Aluno();
-        aluno.setNome(tfdNome.getText());
-        aluno.setCpf(tfdCPF.getText());
-        aluno.setEndereco(tfdEndereço.getText());
+        Disciplina disciplina = new Disciplina();
+        disciplina.setNome(tfdNome.getText());
+        disciplina.setCarga(Integer.parseInt(tfdCargaHoraria.getText()));
+
     
 
-        AlunoDAO alunoDAO = new AlunoDAO();
+        DisciplinaDAO DisciplinaDAO = new DisciplinaDAO();
 
         String retorno = null;
 
         if ((tfdNome.getText().trim().isEmpty() == false) &&
-                (tfdEndereço.getText().trim().isEmpty() == false))
+                (tfdCargaHoraria.getText().trim().isEmpty() == false))
                 
         {
             if (codigo == 0) {
-                retorno = alunoDAO.salvar(aluno);
+                retorno = DisciplinaDAO.salvar(disciplina);
             } else {
-                aluno.setId(codigo);
-                retorno = alunoDAO.atualizar(aluno);
+                disciplina.setId(codigo);
+                retorno = DisciplinaDAO.atualizar(disciplina);
             }
         }
         if (retorno == null && (tfdNome.getText().trim().isEmpty() == false) &&
-              (tfdEndereço.getText() != null))
+              (tfdCargaHoraria.getText() != null))
             {
             JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
             tfdNome.setText("");
-            tfdCPF.setText("");
+            tfdCargaHoraria.setText("");
             tfdNome.requestFocus();
             codigo = 0;
-            new AlunoDAO().popularTabela(tblAluno, tfdCriterio.getText());
+            new DisciplinaDAO().popularTabela(tblDisciplina, tfdCriterio.getText());
         } else {
 
             JOptionPane.showMessageDialog(null, "Problemas ao salvar registro! Verifique os dados informados\n\n"
@@ -301,17 +283,16 @@ public class IfrDisciplina extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        new AlunoDAO().popularTabela(tblAluno, tfdCriterio.getText());
+        new DisciplinaDAO().popularTabela(tblDisciplina, tfdCriterio.getText());
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        String valor = String.valueOf(tblAluno.getValueAt(tblAluno.getSelectedRow(), 0));
+        String valor = String.valueOf(tblDisciplina.getValueAt(tblDisciplina.getSelectedRow(), 0));
 
-        Aluno a = (Aluno) new AlunoDAO().consultarId(Integer.parseInt(valor));
+        Disciplina d = (Disciplina) new DisciplinaDAO().consultarId(Integer.parseInt(valor));
 
-        tfdNome.setText(a.getNome());
-        tfdCPF.setText(a.getCpf());
-        tfdEndereço.setText(a.getEndereco());
+        tfdNome.setText(d.getNome());
+        tfdCargaHoraria.setText(String.valueOf(d.getCarga()));
 //        if (u.getSexo() == 'M') {
 //            jRadioButton1.setSelected(true);
 //        }
@@ -323,42 +304,34 @@ public class IfrDisciplina extends javax.swing.JInternalFrame {
 //        System.out.println(u.getData_nascimento());
 //        System.out.println(Formatacao.ajustaDataDMA(u.getData_nascimento()));
 
-        codigo = a.getId();
+        codigo = d.getId();
 
         jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void tfdNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfdNomeActionPerformed
-
     private void tfdExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdExcluirActionPerformed
 
-        String valor = String.valueOf(tblAluno.getValueAt(tblAluno.getSelectedRow(), 0));
-        Aluno a = (Aluno) new AlunoDAO().consultarId(Integer.parseInt(valor));
-        codigo = a.getId();
-        String retorno = new AlunoDAO().excluir(codigo);
+        String valor = String.valueOf(tblDisciplina.getValueAt(tblDisciplina.getSelectedRow(), 0));
+        Disciplina d = (Disciplina) new DisciplinaDAO().consultarId(Integer.parseInt(valor));
+        codigo = d.getId();
+        String retorno = new DisciplinaDAO().excluir(codigo);
 
         if (retorno == null) {
             JOptionPane.showMessageDialog(null, "Alterado com sucesso");
-            new AlunoDAO().popularTabela(tblAluno, "");
+            new DisciplinaDAO().popularTabela(tblDisciplina, "");
         } else {
-            JOptionPane.showMessageDialog(null, "Erro ao alterar aluno");
+            JOptionPane.showMessageDialog(null, "Erro ao alterar disciplina");
         }
 
     }//GEN-LAST:event_tfdExcluirActionPerformed
 
-    private void tfdEndereçoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdEndereçoKeyTyped
-
-    }//GEN-LAST:event_tfdEndereçoKeyTyped
-
-    private void tfdEndereçoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdEndereçoActionPerformed
+    private void tfdCargaHorariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdCargaHorariaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfdEndereçoActionPerformed
+    }//GEN-LAST:event_tfdCargaHorariaActionPerformed
 
-    private void tfdCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdCPFActionPerformed
+    private void tfdNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfdCPFActionPerformed
+    }//GEN-LAST:event_tfdNomeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -371,15 +344,13 @@ public class IfrDisciplina extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable tblAluno;
-    private javax.swing.JFormattedTextField tfdCPF;
+    private javax.swing.JTable tblDisciplina;
+    private javax.swing.JTextField tfdCargaHoraria;
     private javax.swing.JTextField tfdCriterio;
-    private javax.swing.JTextField tfdEndereço;
     private javax.swing.JButton tfdExcluir;
     private javax.swing.JTextField tfdNome;
     private javax.swing.JLabel validacao;

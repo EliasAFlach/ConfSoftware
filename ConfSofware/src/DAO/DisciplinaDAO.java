@@ -24,25 +24,18 @@ public class DisciplinaDAO implements IDAO {
 
     @Override
     public String salvar(Object o) {
-        Turma turma = (Turma) o;
+        Disciplina disciplina = (Disciplina) o;
 
         try {
 //          Statement st = bilhetario.Bilhetario.conexao.createStatement();
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
-            String sql = "INSERT INTO turma (id, codigo, quant_alunos, disciplina_id, turno, regime, professor, datainivigencia, datafimvigencia) VALUES ("
+            String sql = "INSERT INTO disciplina VALUES ("
                     + "DEFAULT,"
-                    + "'" + turma.getCodigo() + "',"
-                    + " " + turma.getQuantidadeAlunos()+ ", "
-                    + " " + turma.getDisciplina() + ", "                    
-                    + "'" + turma.getTurno()+ "', "
-                    + "'" + turma.getRegime()+ "', "
-                    + "'" + turma.getProfessor()+ "', "
-                    + "'" + turma.getDataInicio()+ "', "
-                    + "'" + turma.getDataFim()+ "' "
-                    + ")";
+                    + "'" + disciplina.getNome() + "',"
+                    + " " + disciplina.getCarga()+ ")";
 
-            System.out.println("Query SALVAR turma: " + sql);
+            System.out.println("Query SALVAR disciplina: " + sql);
             int resultado = st.executeUpdate(sql);
 
             if (resultado != 0) {
@@ -51,7 +44,34 @@ public class DisciplinaDAO implements IDAO {
                 return "xxx";
             }
         } catch (Exception e) {
-            System.out.println("Erro salvar turma = " + e);
+            System.out.println("Erro salvar disciplina = " + e);
+            return e.toString();
+        }
+
+    }
+    
+    public String salvarTeste(Object o) {
+        Disciplina disciplina = (Disciplina) o;
+
+        try {
+//          Statement st = bilhetario.Bilhetario.conexao.createStatement();
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = "INSERT INTO disciplina VALUES ("
+                    + "DEFAULT,"
+                    + "'" + disciplina.getNome() + "',"
+                    + " " + disciplina.getCarga()+ ")";
+
+            System.out.println("Query SALVAR disciplina: " + sql);
+            int resultado = st.executeUpdate(sql);
+
+            if (resultado != 0) {
+                return null;
+            } else {
+                return "xxx";
+            }
+        } catch (Exception e) {
+            System.out.println("Erro salvar disciplina = " + e);
             return e.toString();
         }
 
@@ -59,21 +79,15 @@ public class DisciplinaDAO implements IDAO {
 
     @Override
     public String atualizar(Object o) {
-        Turma turma = (Turma) o;
+        Disciplina disciplina = (Disciplina) o;
 
         try {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
-            String sql = "UPDATE turma"
-                    + "SET  codigo = '" + turma.getCodigo() + "',"
-                    + "     quant_alunos = " + turma.getQuantidadeAlunos()+ ", "
-                    + "     disciplina_id = " + turma.getDisciplina() + ", "                    
-                    + "     turno = '" + turma.getTurno()+ "', "
-                    + "     regime = '" + turma.getRegime()+ "', "
-                    + "     professor = '" + turma.getProfessor()+ "', "
-                    + "     datainivigencia = '" + turma.getDataInicio()+ "', "
-                    + "     datafimvigencia = '" + turma.getDataFim()+ "' "
-                    + "WHERE id = " + turma.getId();
+            String sql = "UPDATE disciplina"
+                    + "SET  nome = '" + disciplina.getNome()+ "',"
+                    + "carga_horaria = " + disciplina.getCarga() 
+                    + "WHERE id = " + disciplina.getId();
 
             int resultado = st.executeUpdate(sql);
 
@@ -84,7 +98,7 @@ public class DisciplinaDAO implements IDAO {
             }
 
         } catch (Exception e) {
-            System.out.println("Erro ao atualizar turma: " + e);
+            System.out.println("Erro ao atualizar disciplina: " + e);
             return e.toString();
         }
     }
@@ -94,7 +108,7 @@ public class DisciplinaDAO implements IDAO {
         try {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
-            String sql = " DELETE FROM turma "
+            String sql = " DELETE FROM disciplina "
                        + " WHERE id = " + id;
 
             int resultado = st.executeUpdate(sql);
@@ -102,11 +116,11 @@ public class DisciplinaDAO implements IDAO {
             if (resultado != 0) {
                 return null;
             } else {
-                return "erro ao excluir turma";
+                return "erro ao excluir disciplina";
             }
 
         } catch (Exception e) {
-            System.out.println("Erro ao atualizar turma: " + e);
+            System.out.println("Erro ao atualizar disciplina: " + e);
             return e.toString();
         }
     }
@@ -118,36 +132,30 @@ public class DisciplinaDAO implements IDAO {
 
     @Override
     public ArrayList<Object> consultar(String criterio) {
-        ArrayList<Object> turmas = new ArrayList<>();
+        ArrayList<Object> disciplinas = new ArrayList<>();
 
         try {
             //Statement st = bilhetario.Bilhetario.conexao.createStatement();
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
-            ResultSet resultado = st.executeQuery("SELECT * FROM turma");
+            ResultSet resultado = st.executeQuery("SELECT * FROM disciplina");
 
             if (resultado.isBeforeFirst()) {
                 while (resultado.next()) {
                     // captura dados do ResultSet
-                    Turma turma = new Turma();
+                    Turma disciplina = new Turma();
                     
-                    turma.setId(resultado.getInt("id"));
-                    turma.setCodigo(resultado.getString("codigo"));
-                    turma.setQuantidadeAlunos(resultado.getInt("quant_alunos"));
-                    turma.setDisciplina(resultado.getInt("disciplina_id"));
-                    turma.setTurno(resultado.getString("turno"));
-                    turma.setRegime(resultado.getString("regime"));
-                    turma.setProfessor(resultado.getString("professor"));
-                    turma.setDataInicio(resultado.getString("datainivigencia"));
-                    turma.setDataFim(resultado.getString("datafimvigencia"));
+                    disciplina.setId(resultado.getInt("id"));
+                    disciplina.setCodigo(resultado.getString("nome"));
+                    disciplina.setQuantidadeAlunos(resultado.getInt("carga_horaria"));
 
 
-                    turmas.add(turma);
+                    disciplinas.add(disciplina);
                 }
             }
         } catch (Exception e) {
-            System.out.println("Erro consultar turmas = " + e);
+            System.out.println("Erro consultar disciplinas = " + e);
         }
-        return turmas;
+        return disciplinas;
     }
 
     @Override
@@ -172,12 +180,12 @@ public class DisciplinaDAO implements IDAO {
             }
 
         } catch (Exception e) {
-            System.out.println("Erro ao consultar turma: " + e);
+            System.out.println("Erro ao consultar disciplina: " + e);
             return null;
         }
     }
 
-    public void popularTabela(JTable tblTurma, String text) {
+    public void popularTabela(JTable tblDisciplina, String text) {
                 ResultSet resultadoQ;
 
         // dados da tblAluno
@@ -186,52 +194,39 @@ public class DisciplinaDAO implements IDAO {
         // cabecalho da tblAluno
         Object[] cabecalho = new Object[3];
         cabecalho[0] = "ID";
-        cabecalho[1] = "Codigo";
-        cabecalho[2] = "Quant. Alunos";
-        cabecalho[3] = "Disciplina";
-        cabecalho[4] = "ID Disciplina";
-        cabecalho[5] = "Turno";
-        cabecalho[6] = "Regime";
-        cabecalho[7] = "Professor";
-        cabecalho[8] = "Inicio";
-        cabecalho[9] = "Fim";
+        cabecalho[1] = "Nome";
+        cabecalho[2] = "Carga horaria";
         
-        // cria matriz de acordo com nº de registros da tblTurma
+        // cria matriz de acordo com nº de registros da tblDisciplina
         try {
             resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(""
-                    + "SELECT count(*) FROM turma "
-                    + "WHERE codigo ILIKE '%" + text +"%'");
+                    + "SELECT count(*) FROM disciplina "
+                    + "WHERE nome ILIKE '%" + text +"%'");
 
             resultadoQ.next();
 
-            dadosTabela = new Object[resultadoQ.getInt(1)][9];
+            dadosTabela = new Object[resultadoQ.getInt(1)][3];
 
         } catch (Exception e) {
-            System.out.println("Erro ao consultar turma: " + e);
+            System.out.println("Erro ao consultar disciplina: " + e);
         }
 
         int lin = 0;
 
-        // efetua consulta na tblTurma
+        // efetua consulta na tblDisciplina
         try {
             resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(""
-                    + " SELECT t.id, t.codigo, t.quant_alunos, d.nome, t.disciplina_id, t.turno, t.regime, t.professor, t.datainivigencia, t.datafimvigencia " 
-                    + " FROM turma t, disciplina d"
-                    + " WHERE t.codigo ILIKE '%" + text
-                    + "%' ORDER BY id ASC");
+                    + " SELECT d.id, d.nome, d.carga_horaria " 
+                    + " FROM disciplina d"
+                    + " WHERE nome ILIKE '%" + text
+                    + "%' ORDER BY d.id ASC");
 
             while (resultadoQ.next()) {
 
                 dadosTabela[lin][0] = resultadoQ.getObject("id");
-                dadosTabela[lin][1] = resultadoQ.getObject("codigo");
-                dadosTabela[lin][2] = resultadoQ.getObject("quant_alunos");
-                dadosTabela[lin][3] = resultadoQ.getObject("nome");
-                dadosTabela[lin][4] = resultadoQ.getObject("disciplina_id");
-                dadosTabela[lin][5] = resultadoQ.getObject("turno");
-                dadosTabela[lin][6] = resultadoQ.getObject("regime");
-                dadosTabela[lin][7] = resultadoQ.getObject("professor");
-                dadosTabela[lin][8] = resultadoQ.getObject("datainivigencia");
-                dadosTabela[lin][9] = resultadoQ.getObject("datafimvigencia");
+                dadosTabela[lin][1] = resultadoQ.getObject("nome");
+                dadosTabela[lin][2] = resultadoQ.getObject("carga_horaria");
+
 
                 // caso a coluna precise exibir uma imagem
 //                if (resultadoQ.getBoolean("Situacao")) {
@@ -242,12 +237,12 @@ public class DisciplinaDAO implements IDAO {
                 lin++;
             }
         } catch (Exception e) {
-            System.out.println("problemas para popular tblTurma...");
+            System.out.println("problemas para popular tblDisciplina...");
             System.out.println(e);
         }
 
         // configuracoes adicionais no componente tblAluno
-        tblTurma.setModel(new DefaultTableModel(dadosTabela, cabecalho) {
+        tblDisciplina.setModel(new DefaultTableModel(dadosTabela, cabecalho) {
             @Override
             // quando retorno for FALSE, a tblAluno nao é editavel
             public boolean isCellEditable(int row, int column) {
@@ -272,13 +267,13 @@ public class DisciplinaDAO implements IDAO {
             }
         });
 
-        // permite seleção de apenas uma linha da tblTurma
-        tblTurma.setSelectionMode(0);
+        // permite seleção de apenas uma linha da tblDisciplina
+        tblDisciplina.setSelectionMode(0);
 
-        // redimensiona as colunas de uma tblTurma
+        // redimensiona as colunas de uma tblDisciplina
         TableColumn column = null;
-        for (int i = 0; i < tblTurma.getColumnCount(); i++) {
-            column = tblTurma.getColumnModel().getColumn(i);
+        for (int i = 0; i < tblDisciplina.getColumnCount(); i++) {
+            column = tblDisciplina.getColumnModel().getColumn(i);
             switch (i) {
                 case 0:
                     column.setPreferredWidth(17);
@@ -292,4 +287,8 @@ public class DisciplinaDAO implements IDAO {
             }
         }
     }
+    
+    
+    
+    
 }
