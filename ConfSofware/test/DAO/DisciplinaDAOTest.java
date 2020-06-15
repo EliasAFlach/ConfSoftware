@@ -55,7 +55,7 @@ public class DisciplinaDAOTest {
     @Order(1)
     public void testSalvarTeste() {
        System.out.println("salvar");
-        String disciplinaTest = "Extreme programming";
+        String disciplinaTest = "Extreme Programming";
 
         Object o = null;
         Disciplina disciplina = new Disciplina();
@@ -76,10 +76,9 @@ public class DisciplinaDAOTest {
     public void testSelect() throws SQLException
     {
         System.out.println("testar nome da disciplina inserida no teste anterior (1)");
-        String disciplinaTest_name = "Extreme programming";
-        int disciplinaTest_carga_horaria = 60;
+        String disciplinaTest_name = "";
 
-        String expResult = null;
+        String expResult = "Extreme Programming";
         
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
@@ -93,11 +92,11 @@ public class DisciplinaDAOTest {
                disciplina.setId(resultado.getInt("id"));
                disciplina.setNome(resultado.getString("nome"));
                disciplina.setCarga(resultado.getInt("carga_horaria"));
-               expResult = disciplina.getNome();
+               disciplinaTest_name = disciplina.getNome();
             } else {
                 System.out.println("oi");
             }
-        assertEquals(disciplinaTest_name, expResult);     
+        assertEquals(expResult, disciplinaTest_name);     
     }
 
     @Test
@@ -105,10 +104,9 @@ public class DisciplinaDAOTest {
     public void testCargaHoraria() throws SQLException
     {
         System.out.println("testar carga horária da disciplina inserida no teste (1)");
-        String disciplinaTest = "Extreme programming";
-        int disciplinaTest_carga_horaria = 60;
-
-        int expResult = 0;
+        String disciplinaTest = "Extreme Programming";
+        int disciplinaTest_carga_horaria = 0;
+        int expResult = 60;
         
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
@@ -122,12 +120,22 @@ public class DisciplinaDAOTest {
                disciplina.setId(resultado.getInt("id"));
                disciplina.setNome(resultado.getString("nome"));
                disciplina.setCarga(resultado.getInt("carga_horaria"));
-               expResult = disciplina.getCarga();
+               disciplinaTest_carga_horaria = disciplina.getCarga();
             } else {
                 System.out.println("oi");
             }
-        assertEquals(disciplinaTest_carga_horaria, expResult);     
+        assertEquals(expResult, disciplinaTest_carga_horaria);     
     }
     
+//    @Test
+//    @Order(4)
+//    public void testExcluirTeste() {
+//        System.out.println("excluir o teste inserido anteriormente");
+//        int codigo = 100;
+//        DisciplinaDAO instance = new DisciplinaDAO();
+//        String expResult = null;
+//        String result = instance.excluir(codigo);
+//        assertEquals(expResult, result);
+//   }
     
     }

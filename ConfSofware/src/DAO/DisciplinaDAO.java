@@ -58,7 +58,7 @@ public class DisciplinaDAO implements IDAO {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
             String sql = "INSERT INTO disciplina VALUES ("
-                    + "DEFAULT,"
+                    + disciplina.getId() + ","
                     + "'" + disciplina.getNome() + "',"
                     + " " + disciplina.getCarga()+ ")";
 
