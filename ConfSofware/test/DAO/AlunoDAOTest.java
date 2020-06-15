@@ -21,9 +21,9 @@ import org.junit.jupiter.api.Order;
 /**
  *
  */
-public class AlunoDAOtest{
+public class AlunoDAOTest {
     
-    public AlunoDAOtest() {
+    public AlunoDAOTest() {
     
     }
     
@@ -127,6 +127,21 @@ public class AlunoDAOtest{
             }
             
         assertEquals(expResult,cpf);     
+    }
+
+    @Test
+    @Order(4)
+    public void testConsultarLogin() {
+        System.out.println("teste da consulta do login");
+        String cpf = "03788657065";
+        String codigo = "123456";
+
+        String expResult = "ok";
+
+        Aluno aluno = new Aluno();
+        AlunoDAO instance = new AlunoDAO();
+        Object result = instance.consultarLoginTeste(codigo, cpf);
+        assertEquals(expResult, result);
     }
     
     

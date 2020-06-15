@@ -15,6 +15,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.TestMethodOrder;
+
 
 /**
  *
@@ -65,12 +69,47 @@ public class TurmaDAOTest {
         String result = instance.salvarTeste(turma);
         assertEquals(expResult, result);
     }
+
+    @Test
+    @Order(1)
+    public void testSalvarTeste2() {
+       System.out.println("inserir dado para futura exclusão");
+        Object o = null;
+        Turma turma = new Turma();
+        TurmaDAO instance = new TurmaDAO();
+        turma.setCodigo("530");
+        turma.setQuantidadeAlunos(24);
+        turma.setDisciplina(1);
+        turma.setTurno("Matutino");
+        turma.setRegime("EAD");
+        turma.setProfessor("Fabricio Pretto");
+        turma.setDataInicio("10/01/2020");
+        turma.setDataFim("20/06/2020");
+   
+        
+        String expResult = null;
+        String result = instance.salvarTeste(turma);
+        assertEquals(expResult, result);
+    }
+
     
+
+    @Test
+    @Order(3)
+    public void testAtualizarNomeTeste() {
+       System.out.println("consultar pelo nome atualizado no teste anterior (2)");
+        Object o = null;
+        TurmaDAO instance = new TurmaDAO();
+        String expResult = "ok";
+        String result = instance.consultarNomeTeste();
+        assertEquals(expResult, result);
+    }
+
        /**
      * Test of consultarIdTeste method, of class TurmaDAO.
      */
     @Test
-    @Order(2)
+    @Order(4)
     public void testConsultarIdTeste() {
         System.out.println("consultarId");
         String id = "520";
@@ -85,13 +124,25 @@ public class TurmaDAOTest {
      * Test of excluirTeste method, of class TurmaDAO.
      */
     @Test
-    @Order(3)
+    @Order(5)
     public void testExcluirTeste() {
-        System.out.println("excluir");
-        String codigo = "516";
+        System.out.println("excluir o teste inserido para exclusão anteriormente");
+        String codigo = "530";
         TurmaDAO instance = new TurmaDAO();
         String expResult = null;
         String result = instance.excluirTeste(codigo);
+        assertEquals(expResult, result);
+   }
+
+    @Test
+    @Order(2)
+    public void testAtualizarTeste() {
+       System.out.println("atualizar nome da disciplina inserida no teste anterior (1)");
+        Object o = null;
+        Turma turma = new Turma();
+        TurmaDAO instance = new TurmaDAO();
+        String expResult = null;
+        String result = instance.atualizarTeste(turma);
         assertEquals(expResult, result);
     }
   }

@@ -430,6 +430,7 @@ public class IfrTurma extends javax.swing.JInternalFrame {
         if (retorno == null) {
             JOptionPane.showMessageDialog(null, "Excluido com sucesso");
             new TurmaDAO().popularTabela(tblTurma, "");
+            limpaDados();
         } else {
             JOptionPane.showMessageDialog(null, "Erro ao excluir turma");
         }

@@ -198,6 +198,28 @@ public class AlunoDAO implements IDAO {
         }
     }
 
+    public Object consultarLoginTeste(String codigo, String cpf) {
+        try {
+
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = "select * from aluno where cpf='" + cpf + "' AND codigo = '" + codigo + "' ";
+
+            ResultSet resultado = st.executeQuery(sql);
+
+            if (resultado.next()) {
+                return "ok";
+            } else {
+                return null;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro ao consultar aluno: " + e);
+            return null;
+        }
+    }
+
+
     public void popularTabela(JTable tblAluno, String text) {
                 ResultSet resultadoQ;
 

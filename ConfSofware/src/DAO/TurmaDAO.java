@@ -120,6 +120,30 @@ public class TurmaDAO implements IDAO {
         }
     }
 
+    public String atualizarTeste(Object o) {
+        Turma turma = (Turma) o;
+
+        try {
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = "UPDATE turmaTeste "
+                    + " SET professor = 'Professor Atualizado' "
+                    + " WHERE codigo = '516' ";
+
+            int resultado = st.executeUpdate(sql);
+
+            if (resultado != 0) {
+                return null;
+            } else {
+                return "erro ao alterar";
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro ao atualizar turma: " + e);
+            return e.toString();
+        }
+    }
+
     @Override
     public String excluir(int id) {
         try {
@@ -256,6 +280,28 @@ public class TurmaDAO implements IDAO {
                turma.setProfessor(resultado.getString("professor"));
                turma.setDataInicio(resultado.getString("datainivigencia"));
                turma.setDataFim(resultado.getString("datafimvigencia"));
+               return "ok";
+            } else {
+                return null;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro ao consultar turma: " + e);
+            return null;
+        }
+    }
+
+    public String consultarNomeTeste() {
+        try {
+
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = "SELECT * FROM turmaTeste "
+                    + "WHERE professor = 'Professor Atualizado' ";
+
+            ResultSet resultado = st.executeQuery(sql);
+
+            if (resultado.next()) {
                return "ok";
             } else {
                 return null;
