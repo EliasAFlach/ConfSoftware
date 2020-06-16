@@ -23,7 +23,7 @@ public class ConexaoBD {
             Properties prop = new Properties();
             //prop.load(new FileInputStream("db.properties"));
             String dbdriver = "org.postgresql.Driver";
-            String dburl = "jdbc:postgresql://localhost:5432/ConfSoftware";
+            String dburl = "jdbc:postgresql://192.168.0.102:5432/ConfSoftware";
             String dbuser = "postgres";
             String dbsenha = "postgres";
 
