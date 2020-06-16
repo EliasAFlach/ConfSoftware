@@ -5,7 +5,7 @@
  */
 package Apoio;
 
-import com.sun.glass.events.KeyEvent;
+import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.*;
@@ -183,7 +183,7 @@ public class Formatacao {
      public static void forceDotsAndNumbers(java.awt.event.KeyEvent evt){                                   
         char c = evt.getKeyChar();
         
-        if(!(Character.isDigit(c) || c ==  KeyEvent.VK_BACKSPACE || c == KeyEvent.VK_DELETE || c == KeyEvent.VK_PERIOD))
+        if(!(Character.isDigit(c) || c ==  KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE || c == KeyEvent.VK_PERIOD))
         {
             evt.consume();
         }
@@ -192,7 +192,7 @@ public class Formatacao {
      public static void forceNumbers(java.awt.event.KeyEvent evt){                                   
         char c = evt.getKeyChar();
         
-        if(!(Character.isDigit(c) || c ==  KeyEvent.VK_BACKSPACE || c == KeyEvent.VK_DELETE))
+        if(!(Character.isDigit(c) || c ==  KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE))
         {
             evt.consume();
         }   
