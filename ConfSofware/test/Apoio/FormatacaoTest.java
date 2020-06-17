@@ -7,6 +7,11 @@ package Apoio;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import static org.junit.Assert.*;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
