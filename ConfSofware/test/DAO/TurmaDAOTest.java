@@ -71,7 +71,7 @@ public class TurmaDAOTest {
     }
 
     @Test
-    @Order(1)
+    @Order(2)
     public void testSalvarTeste2() {
        System.out.println("inserir dado para futura exclusão");
         Object o = null;
@@ -120,22 +120,9 @@ public class TurmaDAOTest {
         assertEquals(expResult, result);
     }
 
-     /**
-     * Test of excluirTeste method, of class TurmaDAO.
-     */
+     
     @Test
     @Order(5)
-    public void testExcluirTeste() {
-        System.out.println("excluir o teste inserido para exclusão anteriormente");
-        String codigo = "530";
-        TurmaDAO instance = new TurmaDAO();
-        String expResult = null;
-        String result = instance.excluirTeste(codigo);
-        assertEquals(expResult, result);
-   }
-
-    @Test
-    @Order(2)
     public void testAtualizarTeste() {
        System.out.println("atualizar nome da disciplina inserida no teste anterior (1)");
         Object o = null;
@@ -145,4 +132,19 @@ public class TurmaDAOTest {
         String result = instance.atualizarTeste(turma);
         assertEquals(expResult, result);
     }
+
+     /**
+     * Test of excluirTeste method, of class TurmaDAO.
+     */
+    @Test
+    @Order(6)
+    public void testExcluirTeste() {
+        System.out.println("excluir o teste inserido para exclusão anteriormente");
+        String codigo = "530";
+        TurmaDAO instance = new TurmaDAO();
+        String expResult = null;
+        String result = instance.excluirTeste(codigo);
+        assertEquals(expResult, result);
+   }
+
   }
