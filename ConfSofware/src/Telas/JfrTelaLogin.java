@@ -82,7 +82,7 @@ public class JfrTelaLogin extends javax.swing.JFrame {
 
         jLabel1.setText("CPF:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(230, 90, 50, 20);
+        jLabel1.setBounds(240, 90, 50, 20);
 
         txtCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,11 +95,11 @@ public class JfrTelaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtCPF);
-        txtCPF.setBounds(290, 90, 190, 20);
+        txtCPF.setBounds(310, 90, 170, 20);
 
         jLabel2.setText("Codigo:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(230, 60, 50, 20);
+        jLabel2.setBounds(240, 60, 50, 20);
 
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +107,7 @@ public class JfrTelaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtCodigo);
-        txtCodigo.setBounds(290, 60, 90, 20);
+        txtCodigo.setBounds(310, 60, 90, 20);
 
         setSize(new java.awt.Dimension(530, 277));
         setLocationRelativeTo(null);
