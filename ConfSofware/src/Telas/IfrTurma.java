@@ -33,7 +33,7 @@ public class IfrTurma extends javax.swing.JInternalFrame {
      */
     public IfrTurma() {
         initComponents();
-        this.setTitle("Turmas");
+        this.setTitle("Turmas Elias");
         new TurmaDAO().popularTabela(tblTurma, txtCriterio.getText());
         
         CombosDAO cmbDisciplina = new CombosDAO();
@@ -123,7 +123,7 @@ public class IfrTurma extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Nome");
 
-        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.setText("Pegar");
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarActionPerformed(evt);
@@ -141,7 +141,7 @@ public class IfrTurma extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCriterio, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
+                        .addComponent(txtCriterio, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btnPesquisar)))
                 .addContainerGap())
