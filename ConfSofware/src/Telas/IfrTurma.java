@@ -33,7 +33,7 @@ public class IfrTurma extends javax.swing.JInternalFrame {
      */
     public IfrTurma() {
         initComponents();
-        this.setTitle("Turmas");
+        this.setTitle("Turmas Elias");
         new TurmaDAO().popularTabela(tblTurma, txtCriterio.getText());
         
         CombosDAO cmbDisciplina = new CombosDAO();
